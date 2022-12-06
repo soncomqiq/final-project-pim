@@ -22,7 +22,7 @@ router.post("/register", async (req, res) => {
   }
 
   const hashedPwd = await bcrypt.hash(password, 10);
-  await connection.query(`INSERT INTO \`mini-medium\`.\`users\` (\`username\`, \`password\`, \`first_name\`, \`last_name\`, \`role\`)
+  await connection.query(`INSERT INTO \`users\` (\`username\`, \`password\`, \`first_name\`, \`last_name\`, \`role\`)
                           VALUES ('${username}', '${hashedPwd}', '${firstname}', '${lastname}', 'admin')`);
   res.status(200).send("Register successful.")
 })
