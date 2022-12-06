@@ -1,5 +1,8 @@
 const express = require("express");
+const {authenticateToken} = require("../middlewares/jwt");
 const router = express.Router();
+
+router.use(authenticateToken)
 
 router.put("/:id/profile", (req, res) => {
   res.send("Edit profile by ID")

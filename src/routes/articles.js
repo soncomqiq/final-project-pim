@@ -1,5 +1,8 @@
 const express = require("express");
+const {authenticateToken} = require("../middlewares/jwt");
 const router = express.Router();
+
+router.use(authenticateToken)
 
 router.post("/", (req, res) => {
   res.send("Create an Article")

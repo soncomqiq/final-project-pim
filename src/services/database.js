@@ -24,4 +24,19 @@ pool.on('error', (err) => {
   console.log(err)
 })
 
-module.exports = pool;
+function query(sql) {
+  return new Promise((resolve, reject) => {
+    pool.query(sql, (err, result) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(result)
+      }
+    })
+  })
+}
+
+module.exports = {
+  pool,
+  query
+};
