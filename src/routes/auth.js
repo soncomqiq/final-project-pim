@@ -9,14 +9,14 @@ router.post("/login", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  const user = await connection.query(`SELECT *
+  const users = await connection.query(`SELECT *
                                        FROM users
                                        WHERE username = \"${username}\"`);
 
-  if (user.length > 0) {
-    const same = await bcrypt.compare(password, user[0].password)
+  if (users[0].length > 0) {
+    const same = await bcrypt.compare(password, users[0][0].password)
     if (same) {
-      const payload = {id: user[0].id, role: user[0].role}
+      const payload = {id: users[0][0].id, role: users[0][0].role}
       const token = jwt.sign(payload, JWT_SECRET, {expiresIn: JWT_EXPIRE_TIMEOUT});
       res.status(200).send({message: "success", token: token})
     } else {
@@ -62,7 +62,7 @@ router.post("/register", async (req, res) => {
                                        FROM users
                                        WHERE username = \"${username}\"`);
 
-  if (user.length > 0) {
+  if (user[0].length > 0) {
     return res.status(400).send({message: "Username is already taken."});
   }
 

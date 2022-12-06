@@ -13,11 +13,11 @@ router.post("/register", async (req, res) => {
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
 
-  const user = await connection.query(`SELECT *
+  const users = await connection.query(`SELECT *
                                        FROM users
                                        WHERE username = \"${username}\"`);
 
-  if (user.length > 0) {
+  if (users[0].length > 0) {
     return res.status(400).send({message: "Username is already taken."});
   }
 
