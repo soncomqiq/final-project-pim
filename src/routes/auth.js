@@ -9,9 +9,7 @@ router.post("/login", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  const users = await connection.query(`SELECT *
-                                       FROM users
-                                       WHERE username = \"${username}\"`);
+  const users = await connection.query("SELECT * FROM users WHERE username = ?", [username]);
 
   if (users[0].length > 0) {
     const same = await bcrypt.compare(password, users[0][0].password)
@@ -58,17 +56,14 @@ router.post("/register", async (req, res) => {
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
 
-  const user = await connection.query(`SELECT *
-                                       FROM users
-                                       WHERE username = \"${username}\"`);
+  const user = await connection.query("SELECT * FROM users WHERE username = ?", [username]);
 
   if (user[0].length > 0) {
     return res.status(400).send({message: "Username is already taken."});
   }
 
   const hashedPwd = await bcrypt.hash(password, 10);
-  await connection.query(`INSERT INTO \`users\` (\`username\`, \`password\`, \`first_name\`, \`last_name\`, \`role\`)
-                          VALUES ('${username}', '${hashedPwd}', '${firstname}', '${lastname}', 'user')`);
+  await connection.query("INSERT INTO users (username, password, first_name, last_name, role) VALUES (?, ?, ?, ?, 'user')", [username, hashedPwd, firstname, lastname]);
   res.status(200).send("Register successful.")
 })
 

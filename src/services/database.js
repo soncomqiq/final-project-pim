@@ -9,9 +9,9 @@ const dbConfig = {
   port: DB_PORT
 }
 
-const pool = mysql.createPool(dbConfig);
+const connection = mysql.createConnection(dbConfig);
 
-pool.getConnection((err, connection) => {
+connection.connect((err, connection) => {
   if (err) {
     console.log(err)
     console.log("Cannot connect database")
@@ -20,8 +20,8 @@ pool.getConnection((err, connection) => {
   }
 })
 
-pool.on('error', (err) => {
+connection.on('error', (err) => {
   console.log(err)
 })
 
-module.exports = pool.promise();
+module.exports = connection.promise();

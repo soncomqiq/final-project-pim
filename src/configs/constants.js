@@ -12,6 +12,10 @@ const SERVER_PORT = 3000
 const JWT_SECRET = "2XfHoRtorX1OmeqX"
 const JWT_EXPIRE_TIMEOUT = 3600
 
+// ENum
+const ADMIN_ROLE = 'admin'
+const USER_ROLE = 'user'
+
 module.exports = {
   DB_HOST,
   DB_USER,
@@ -21,4 +25,6 @@ module.exports = {
   SERVER_PORT,
   JWT_SECRET,
   JWT_EXPIRE_TIMEOUT,
+  ADMIN_ROLE,
+  USER_ROLE
 }
