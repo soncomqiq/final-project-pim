@@ -11,8 +11,8 @@ router.use(authorizeAdmin)
 router.post("/register", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-  const firstname = req.body.firstname;
-  const lastname = req.body.lastname;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
 
   const users = await connection.query("SELECT * FROM users WHERE username = ?", [username]);
 
@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
   }
 
   const hashedPwd = await bcrypt.hash(password, 10);
-  await connection.query("INSERT INTO users (username, password, first_name, last_name, role) VALUES (?, ?, ?, ?, ?)", [username, hashedPwd, firstname, lastname, ADMIN_ROLE]);
+  await connection.query("INSERT INTO users (username, password, first_name, last_name, role) VALUES (?, ?, ?, ?, ?)", [username, hashedPwd, firstName, lastName, ADMIN_ROLE]);
   res.status(200).send("Register successful.")
 })
 
