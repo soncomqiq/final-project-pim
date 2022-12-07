@@ -1,19 +1,12 @@
 const express = require("express");
 const {authenticateToken} = require("../middlewares/jwt");
+const {getMyProfile, editMyProfileById, editMyPasswordById} = require("../controllers/users");
 const router = express.Router();
 
 router.use(authenticateToken)
 
-router.put("/:id/profile", (req, res) => {
-  res.send("Edit profile by ID")
-})
-
-router.put("/:id/password", (req, res) => {
-  res.send("Edit profile by ID")
-})
-
-router.get("/:id", (req, res) => {
-  res.send("Get User By ID")
-})
+router.put("/my-profile", editMyProfileById)
+router.put("/my-password", editMyPasswordById)
+router.get("/my-profile", getMyProfile)
 
 module.exports = router;
