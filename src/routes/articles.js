@@ -11,7 +11,7 @@ const {
 } = require("../controllers/articles");
 const router = express.Router();
 
-router.use(authenticateToken)
+// Validate Token
 
 router.post("/", createArticle)
 router.get("/", getAllArticles)

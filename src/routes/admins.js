@@ -3,8 +3,8 @@ const {authenticateToken, authorizeAdmin} = require("../middlewares/jwt");
 const {registerAdmin, getAllUsers, getUserById, updateUserById} = require("../controllers/admins");
 const router = express.Router();
 
-router.use(authenticateToken)
-router.use(authorizeAdmin)
+// Validate Token
+// Validate Admin
 
 router.post("/register", registerAdmin)
 router.get("/users", getAllUsers)

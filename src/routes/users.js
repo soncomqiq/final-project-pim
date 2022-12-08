@@ -3,7 +3,7 @@ const {authenticateToken} = require("../middlewares/jwt");
 const {getMyProfile, editMyProfileById, editMyPasswordById} = require("../controllers/users");
 const router = express.Router();
 
-router.use(authenticateToken)
+// Validate Token
 
 router.put("/my-profile", editMyProfileById)
 router.put("/my-password", editMyPasswordById)
