@@ -88,7 +88,7 @@ const unlikeArticleById = async (req, res) => {
   }
 
   await connection.query("DELETE FROM `user_like_articles` WHERE (`user_id` = ?) and (`article_id` = ?);", [userId, articleId])
-  es.send({message: "You've unliked this article."})
+  res.send({message: "You've unliked this article."})
 }
 
 module.exports = {
